@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:mangrove_boat"
+    },
+    "C": {
+      "item": "minecraft:copper_block"
+    }
+  },
+  "pattern": [
+    "CBC",
+    "CCC"
+  ],
+  "result": {
+    "item": "copperboats:copper_mangrove_boat"
+  }
+}
