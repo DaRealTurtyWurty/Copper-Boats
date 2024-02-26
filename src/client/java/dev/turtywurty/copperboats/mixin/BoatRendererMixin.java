@@ -8,6 +8,7 @@ import dev.turtywurty.copperboats.CopperBoats;
 import dev.turtywurty.copperboats.CopperBoatsClient;
 import dev.turtywurty.copperboats.entity.CopperBoat;
 import dev.turtywurty.copperboats.entity.CopperChestBoat;
+import dev.turtywurty.copperboats.entity.OxidizableBoat;
 import dev.turtywurty.copperboats.model.CopperBoatModel;
 import dev.turtywurty.copperboats.model.CopperChestBoatModel;
 import dev.turtywurty.copperboats.model.CopperChestRaftModel;
@@ -26,14 +27,16 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 @Debug(export = true)
 @Mixin(BoatRenderer.class)
 public class BoatRendererMixin {
     @Unique
-    private Map<Boat.Type, Pair<ResourceLocation, ListModel<Boat>>> copperboats$copperBoatResources;
+    private Map<Boat.Type, Pair<List<ResourceLocation>, ListModel<Boat>>> copperboats$copperBoatResources;
 
     @Inject(
             method = "<init>",
@@ -42,12 +45,12 @@ public class BoatRendererMixin {
     private void copperboats$init(EntityRendererProvider.Context context, boolean isChest, CallbackInfo callback) {
         this.copperboats$copperBoatResources = Stream.of(Boat.Type.values())
                 .collect(ImmutableMap.toImmutableMap(type -> type, type -> Pair.of(
-                        CopperBoats.id(copperboats$getCopperTextureLocation(type, isChest)),
+                        copperboats$getTextures(type, isChest),
                         copperboats$createCopperBoatModel(context, type, isChest))));
     }
 
     @Unique
-    private ListModel<Boat> copperboats$createCopperBoatModel(EntityRendererProvider.Context context, Boat.Type type, boolean isChest) {
+    private static ListModel<Boat> copperboats$createCopperBoatModel(EntityRendererProvider.Context context, Boat.Type type, boolean isChest) {
         ModelLayerLocation modelLayerLocation = isChest ? CopperBoatsClient.createChestBoatModelName(type) : CopperBoatsClient.createBoatModelName(type);
         ModelPart modelPart = context.bakeLayer(modelLayerLocation);
         if (type == Boat.Type.BAMBOO) {
@@ -58,8 +61,16 @@ public class BoatRendererMixin {
     }
 
     @Unique
-    private String copperboats$getCopperTextureLocation(Boat.Type type, boolean isChest) {
-        return isChest ? "textures/entity/copper_chest_boat/" + type.getName() + ".png" : "textures/entity/copper_boat/" + type.getName() + ".png";
+    private static String copperboats$getCopperTextureLocation(Boat.Type type, boolean isChest, int oxidationLevel) {
+        return isChest ? "textures/entity/copper_chest_boat/" + type.getName() + "_" + oxidationLevel + ".png" :
+                "textures/entity/copper_boat/" + type.getName() + "_" + oxidationLevel + ".png";
+    }
+
+    @Unique
+    private static List<ResourceLocation> copperboats$getTextures(Boat.Type type, boolean isChest) {
+        return IntStream.range(0, OxidizableBoat.MAX_OXIDATION_LEVEL)
+                .mapToObj(level -> CopperBoats.id(copperboats$getCopperTextureLocation(type, isChest, level)))
+                .toList();
     }
 
     @ModifyExpressionValue(

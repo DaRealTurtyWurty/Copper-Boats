@@ -1,5 +1,6 @@
 package dev.turtywurty.copperboats.datagen;
 
+import dev.turtywurty.copperboats.entity.OxidizableBoat;
 import dev.turtywurty.copperboats.item.CopperBoatItem;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
@@ -21,9 +22,11 @@ public class CopperBoatsRecipeProvider extends FabricRecipeProvider {
         super(output);
     }
 
-    private static void createBoatRecipe(RecipeOutput exporter, Optional<Item> input, CopperBoatItem output) {
+    private static void createBoatRecipe(RecipeOutput exporter, Optional<Item> input, CopperBoatItem output, int oxidizedLevel) {
         if (output == null)
             return;
+
+        Item copperBlock = null; // TODO: Get copper block using the oxidized level
 
         input.ifPresent(item -> ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, output)
                 .define('B', item)
@@ -38,15 +41,17 @@ public class CopperBoatsRecipeProvider extends FabricRecipeProvider {
     @Override
     public void buildRecipes(RecipeOutput exporter) {
         for (Boat.Type type : Boat.Type.values()) {
-            Optional<Item> boatOpt = BuiltInRegistries.ITEM.getOptional(ResourceLocation.tryParse(type.getName() + "_boat"))
-                    .or(() -> BuiltInRegistries.ITEM.getOptional(ResourceLocation.tryParse(type.getName() + "_raft")));
-            Optional<Item> chestBoatOpt = BuiltInRegistries.ITEM.getOptional(ResourceLocation.tryParse(type.getName() + "_chest_boat"))
-                    .or(() -> BuiltInRegistries.ITEM.getOptional(ResourceLocation.tryParse(type.getName() + "_chest_raft")));
-            var copperBoat = CopperBoatItem.getBoatItem(type, false);
-            var copperChestBoat = CopperBoatItem.getBoatItem(type, true);
+            for (int level = 0; level < OxidizableBoat.MAX_OXIDATION_LEVEL; level++) {
+                Optional<Item> boatOpt = BuiltInRegistries.ITEM.getOptional(ResourceLocation.tryParse(type.getName() + "_boat"))
+                        .or(() -> BuiltInRegistries.ITEM.getOptional(ResourceLocation.tryParse(type.getName() + "_raft")));
+                Optional<Item> chestBoatOpt = BuiltInRegistries.ITEM.getOptional(ResourceLocation.tryParse(type.getName() + "_chest_boat"))
+                        .or(() -> BuiltInRegistries.ITEM.getOptional(ResourceLocation.tryParse(type.getName() + "_chest_raft")));
+                var copperBoat = CopperBoatItem.getBoatItem(type, false, level);
+                var copperChestBoat = CopperBoatItem.getBoatItem(type, true, level);
 
-            createBoatRecipe(exporter, boatOpt, copperBoat);
-            createBoatRecipe(exporter, chestBoatOpt, copperChestBoat);
+                createBoatRecipe(exporter, boatOpt, copperBoat, level);
+                createBoatRecipe(exporter, chestBoatOpt, copperChestBoat, level);
+            }
         }
     }
 }

@@ -21,6 +21,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.commons.lang3.tuple.Triple;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -30,22 +31,24 @@ import java.util.function.Predicate;
 
 public class CopperBoatItem extends Item {
     private static final Predicate<Entity> ENTITY_PREDICATE = EntitySelector.NO_SPECTATORS.and(Entity::isPickable);
-    private static final Map<Pair<Boat.Type, Boolean>, CopperBoatItem> BOAT_BY_TYPE = new HashMap<>();
+    private static final Map<Triple<Boat.Type, Boolean, Integer>, CopperBoatItem> BOAT_BY_TYPE = new HashMap<>();
 
     private final Boat.Type type;
     private final boolean hasChest;
+    private final int oxidizedLevel;
 
-    public CopperBoatItem(Boat.Type type, boolean hasChest) {
+    public CopperBoatItem(Boat.Type type, boolean hasChest, int oxidizedLevel) {
         super(new Item.Properties().stacksTo(1));
 
         this.type = type;
         this.hasChest = hasChest;
+        this.oxidizedLevel = oxidizedLevel;
 
-        BOAT_BY_TYPE.put(Pair.of(type, hasChest), this);
+        BOAT_BY_TYPE.put(Triple.of(type, hasChest, oxidizedLevel), this);
     }
 
-    public static CopperBoatItem getBoatItem(Boat.Type type, boolean hasChest) {
-        return BOAT_BY_TYPE.get(Pair.of(type, hasChest));
+    public static CopperBoatItem getBoatItem(Boat.Type type, boolean hasChest, int oxidizedLevel) {
+        return BOAT_BY_TYPE.get(Triple.of(type, hasChest, oxidizedLevel));
     }
 
     public static ImmutableList<CopperBoatItem> getBoatItems() {
