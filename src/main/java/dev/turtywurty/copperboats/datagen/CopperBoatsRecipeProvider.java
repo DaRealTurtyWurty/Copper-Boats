@@ -26,16 +26,24 @@ public class CopperBoatsRecipeProvider extends FabricRecipeProvider {
         if (output == null)
             return;
 
-        Item copperBlock = null; // TODO: Get copper block using the oxidized level
-
+        Item copperBlock = getCopperBlockForLevel(oxidizedLevel);
         input.ifPresent(item -> ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, output)
                 .define('B', item)
-                .define('C', Items.COPPER_BLOCK)
+                .define('C', copperBlock)
                 .pattern("CBC")
                 .pattern("CCC")
                 .unlockedBy("has_item", has(item))
-                .unlockedBy("has_copper_block", has(Items.COPPER_BLOCK))
+                .unlockedBy("has_copper_block", has(copperBlock))
                 .save(exporter));
+    }
+
+    private static Item getCopperBlockForLevel(int level) {
+        return switch (level) {
+            case 1 -> Items.EXPOSED_COPPER;
+            case 2 -> Items.WEATHERED_COPPER;
+            case 3 -> Items.OXIDIZED_COPPER;
+            default -> Items.COPPER_BLOCK;
+        };
     }
 
     @Override
