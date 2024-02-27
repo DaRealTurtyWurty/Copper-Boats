@@ -5,7 +5,10 @@
 	"name": "Copper Boats",
 	"description": "This is an example description! Tell everyone what your mod is about!",
 	"authors": [
-		"Me!"
+		"TurtyWurty"
+	],
+	"credits": [
+		"https://www.reddit.com/r/minecraftsuggestions/comments/1axx3z3/copperhulled_boats/"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",

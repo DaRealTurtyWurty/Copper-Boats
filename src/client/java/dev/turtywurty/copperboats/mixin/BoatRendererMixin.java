@@ -20,6 +20,7 @@ import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.vehicle.Boat;
+import org.apache.commons.lang3.tuple.Triple;
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -81,8 +82,9 @@ public class BoatRendererMixin {
             )
     )
     private Object copperboats$render$get(Object original, @Local(argsOnly = true) Boat entity) {
-        if (entity instanceof CopperBoat || entity instanceof CopperChestBoat) {
-            return this.copperboats$copperBoatResources.get(entity.getVariant());
+        if (entity instanceof OxidizableBoat boat) {
+            Pair<List<ResourceLocation>, ListModel<Boat>> pair = this.copperboats$copperBoatResources.get(entity.getVariant());
+            return Pair.of(pair.getFirst().get(boat.getOxidationLevel()), pair.getSecond());
         }
 
         return original;

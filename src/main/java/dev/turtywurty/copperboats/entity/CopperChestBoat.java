@@ -26,7 +26,7 @@ public class CopperChestBoat extends ChestBoat implements OxidizableBoat {
 
     @Override
     public @NotNull Item getDropItem() {
-        return CopperBoatItem.getBoatItem(getVariant(), true);
+        return CopperBoatItem.getBoatItem(getVariant(), true, getOxidationLevel());
     }
 
     @Override

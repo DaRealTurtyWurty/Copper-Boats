@@ -1,5 +1,6 @@
 package dev.turtywurty.copperboats;
 
+import dev.turtywurty.copperboats.init.CreativeTabInit;
 import dev.turtywurty.copperboats.init.EntityTypeInit;
 import dev.turtywurty.copperboats.init.ItemInit;
 import net.fabricmc.api.ModInitializer;
@@ -20,6 +21,7 @@ public class CopperBoats implements ModInitializer {
 	public void onInitialize() {
 		ItemInit.init();
 		EntityTypeInit.init();
+		CreativeTabInit.init();
 
 		LOGGER.info("Copper Boats has been initialized!");
 	}
