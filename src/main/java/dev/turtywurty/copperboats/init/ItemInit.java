@@ -15,15 +15,19 @@ public class ItemInit {
 
     public static void init() {
         for (Boat.Type type : Boat.Type.values()) {
-            for (int level = 0; level < OxidizableBoat.MAX_OXIDATION_LEVEL; level++) {
+            for (int level = 0; level <= OxidizableBoat.MAX_OXIDATION_LEVEL; level++) {
                 if (type == Boat.Type.BAMBOO) {
-                    register("copper_" + type.getName() + "_raft_" + level, new CopperBoatItem(type, false, level));
-                    register("copper_" + type.getName() + "_chest_raft_" + level, new CopperBoatItem(type, true, level));
+                    register("copper_" + type.getName() + "_raft_" + level, new CopperBoatItem(type, false, level, false));
+                    register("copper_" + type.getName() + "_chest_raft_" + level, new CopperBoatItem(type, true, level, false));
+                    register("waxed_copper_" + type.getName() + "_raft_" + level, new CopperBoatItem(type, false, level, true));
+                    register("waxed_copper_" + type.getName() + "_chest_raft_" + level, new CopperBoatItem(type, true, level, true));
                     continue;
                 }
 
-                register("copper_" + type.getName() + "_boat_" + level, new CopperBoatItem(type, false, level));
-                register("copper_" + type.getName() + "_chest_boat_" + level, new CopperBoatItem(type, true, level));
+                register("copper_" + type.getName() + "_boat_" + level, new CopperBoatItem(type, false, level, false));
+                register("copper_" + type.getName() + "_chest_boat_" + level, new CopperBoatItem(type, true, level, false));
+                register("waxed_copper_" + type.getName() + "_boat_" + level, new CopperBoatItem(type, false, level, true));
+                register("waxed_copper_" + type.getName() + "_chest_boat_" + level, new CopperBoatItem(type, true, level, true));
             }
         }
     }

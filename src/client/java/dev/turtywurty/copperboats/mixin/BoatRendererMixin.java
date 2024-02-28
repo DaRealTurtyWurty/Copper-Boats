@@ -6,8 +6,6 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.datafixers.util.Pair;
 import dev.turtywurty.copperboats.CopperBoats;
 import dev.turtywurty.copperboats.CopperBoatsClient;
-import dev.turtywurty.copperboats.entity.CopperBoat;
-import dev.turtywurty.copperboats.entity.CopperChestBoat;
 import dev.turtywurty.copperboats.entity.OxidizableBoat;
 import dev.turtywurty.copperboats.model.CopperBoatModel;
 import dev.turtywurty.copperboats.model.CopperChestBoatModel;
@@ -20,7 +18,6 @@ import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.vehicle.Boat;
-import org.apache.commons.lang3.tuple.Triple;
 import org.spongepowered.asm.mixin.Debug;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -69,7 +66,7 @@ public class BoatRendererMixin {
 
     @Unique
     private static List<ResourceLocation> copperboats$getTextures(Boat.Type type, boolean isChest) {
-        return IntStream.range(0, OxidizableBoat.MAX_OXIDATION_LEVEL)
+        return IntStream.rangeClosed(0, OxidizableBoat.MAX_OXIDATION_LEVEL)
                 .mapToObj(level -> CopperBoats.id(copperboats$getCopperTextureLocation(type, isChest, level)))
                 .toList();
     }

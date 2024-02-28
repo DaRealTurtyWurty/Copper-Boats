@@ -4,7 +4,6 @@ import dev.turtywurty.copperboats.init.CreativeTabInit;
 import dev.turtywurty.copperboats.init.EntityTypeInit;
 import dev.turtywurty.copperboats.init.ItemInit;
 import net.fabricmc.api.ModInitializer;
-
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -12,9 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.state.properties.WoodType;
 
-import java.util.Locale;
 import java.util.Optional;
 
 public class CopperBoatsRecipeProvider extends FabricRecipeProvider {
@@ -22,11 +20,11 @@ public class CopperBoatsRecipeProvider extends FabricRecipeProvider {
         super(output);
     }
 
-    private static void createBoatRecipe(RecipeOutput exporter, Optional<Item> input, CopperBoatItem output, int oxidizedLevel) {
+    private static void createBoatRecipes(RecipeOutput exporter, Optional<Item> input, CopperBoatItem output, int oxidizedLevel, boolean waxed) {
         if (output == null)
             return;
 
-        Item copperBlock = getCopperBlockForLevel(oxidizedLevel);
+        Item copperBlock = getCopperBlockForLevel(oxidizedLevel, waxed);
         input.ifPresent(item -> ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, output)
                 .define('B', item)
                 .define('C', copperBlock)
@@ -37,28 +35,32 @@ public class CopperBoatsRecipeProvider extends FabricRecipeProvider {
                 .save(exporter));
     }
 
-    private static Item getCopperBlockForLevel(int level) {
+    private static Item getCopperBlockForLevel(int level, boolean waxed) {
         return switch (level) {
-            case 1 -> Items.EXPOSED_COPPER;
-            case 2 -> Items.WEATHERED_COPPER;
-            case 3 -> Items.OXIDIZED_COPPER;
-            default -> Items.COPPER_BLOCK;
+            case 1 -> waxed ? Items.WAXED_EXPOSED_COPPER : Items.EXPOSED_COPPER;
+            case 2 -> waxed ? Items.WAXED_WEATHERED_COPPER : Items.WEATHERED_COPPER;
+            case 3 -> waxed ? Items.WAXED_OXIDIZED_COPPER : Items.OXIDIZED_COPPER;
+            default -> waxed ? Items.WAXED_COPPER_BLOCK : Items.COPPER_BLOCK;
         };
     }
 
     @Override
     public void buildRecipes(RecipeOutput exporter) {
         for (Boat.Type type : Boat.Type.values()) {
-            for (int level = 0; level < OxidizableBoat.MAX_OXIDATION_LEVEL; level++) {
+            for (int level = 0; level <= OxidizableBoat.MAX_OXIDATION_LEVEL; level++) {
                 Optional<Item> boatOpt = BuiltInRegistries.ITEM.getOptional(ResourceLocation.tryParse(type.getName() + "_boat"))
                         .or(() -> BuiltInRegistries.ITEM.getOptional(ResourceLocation.tryParse(type.getName() + "_raft")));
                 Optional<Item> chestBoatOpt = BuiltInRegistries.ITEM.getOptional(ResourceLocation.tryParse(type.getName() + "_chest_boat"))
                         .or(() -> BuiltInRegistries.ITEM.getOptional(ResourceLocation.tryParse(type.getName() + "_chest_raft")));
-                var copperBoat = CopperBoatItem.getBoatItem(type, false, level);
-                var copperChestBoat = CopperBoatItem.getBoatItem(type, true, level);
+                var copperBoat = CopperBoatItem.getBoatItem(type, false, level, false);
+                var copperChestBoat = CopperBoatItem.getBoatItem(type, true, level, false);
+                var waxedCopperBoat = CopperBoatItem.getBoatItem(type, false, level, true);
+                var waxedCopperChestBoat = CopperBoatItem.getBoatItem(type, true, level, true);
 
-                createBoatRecipe(exporter, boatOpt, copperBoat, level);
-                createBoatRecipe(exporter, chestBoatOpt, copperChestBoat, level);
+                createBoatRecipes(exporter, boatOpt, copperBoat, level, false);
+                createBoatRecipes(exporter, chestBoatOpt, copperChestBoat, level, false);
+                createBoatRecipes(exporter, boatOpt, waxedCopperBoat, level, true);
+                createBoatRecipes(exporter, chestBoatOpt, waxedCopperChestBoat, level, true);
             }
         }
     }

@@ -3,6 +3,8 @@ package dev.turtywurty.copperboats.item;
 import com.google.common.collect.ImmutableList;
 import dev.turtywurty.copperboats.entity.CopperBoat;
 import dev.turtywurty.copperboats.entity.CopperChestBoat;
+import dev.turtywurty.copperboats.entity.OxidizableBoat;
+import dev.turtywurty.copperboats.util.Quadruple;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -20,8 +22,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
-import org.apache.commons.lang3.tuple.Pair;
-import org.apache.commons.lang3.tuple.Triple;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -31,24 +31,26 @@ import java.util.function.Predicate;
 
 public class CopperBoatItem extends Item {
     private static final Predicate<Entity> ENTITY_PREDICATE = EntitySelector.NO_SPECTATORS.and(Entity::isPickable);
-    private static final Map<Triple<Boat.Type, Boolean, Integer>, CopperBoatItem> BOAT_BY_TYPE = new HashMap<>();
+    private static final Map<Quadruple<Boat.Type, Boolean, Integer, Boolean>, CopperBoatItem> BOAT_BY_TYPE = new HashMap<>();
 
     private final Boat.Type type;
     private final boolean hasChest;
     private final int oxidizedLevel;
+    private final boolean isWaxed;
 
-    public CopperBoatItem(Boat.Type type, boolean hasChest, int oxidizedLevel) {
+    public CopperBoatItem(Boat.Type type, boolean hasChest, int oxidizedLevel, boolean isWaxed) {
         super(new Item.Properties().stacksTo(1));
 
         this.type = type;
         this.hasChest = hasChest;
         this.oxidizedLevel = oxidizedLevel;
+        this.isWaxed = isWaxed;
 
-        BOAT_BY_TYPE.put(Triple.of(type, hasChest, oxidizedLevel), this);
+        BOAT_BY_TYPE.put(Quadruple.of(type, hasChest, oxidizedLevel, isWaxed), this);
     }
 
-    public static CopperBoatItem getBoatItem(Boat.Type type, boolean hasChest, int oxidizedLevel) {
-        return BOAT_BY_TYPE.get(Triple.of(type, hasChest, oxidizedLevel));
+    public static CopperBoatItem getBoatItem(Boat.Type type, boolean hasChest, int oxidizedLevel, boolean isWaxed) {
+        return BOAT_BY_TYPE.get(Quadruple.of(type, hasChest, oxidizedLevel, isWaxed));
     }
 
     public static ImmutableList<CopperBoatItem> getBoatItems() {
@@ -103,10 +105,16 @@ public class CopperBoatItem extends Item {
     private Boat getBoat(Level level, HitResult hitResult, ItemStack itemStack, Player player) {
         Vec3 vec3 = hitResult.getLocation();
         Boat boat = this.hasChest ? new CopperChestBoat(level, vec3.x, vec3.y, vec3.z) : new CopperBoat(level, vec3.x, vec3.y, vec3.z);
+        ((OxidizableBoat) boat).setOxidationLevel(this.oxidizedLevel);
+        ((OxidizableBoat) boat).setWaxed(this.isWaxed);
         if (level instanceof ServerLevel serverLevel) {
             EntityType.createDefaultStackConfig(serverLevel, itemStack, player).accept(boat);
         }
 
         return boat;
+    }
+
+    public boolean isWaxed() {
+        return this.isWaxed;
     }
 }

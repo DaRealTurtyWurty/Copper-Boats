@@ -23,7 +23,7 @@ public class BoatMixin {
     private void controlBoat(CallbackInfo callback, @Local LocalFloatRef speedModifier) {
         Boat boat = (Boat) (Object) this;
         if (boat instanceof OxidizableBoat oxidizable) {
-            speedModifier.set(speedModifier.get() * 1.5F * (oxidizable.getOxidationLevel() / 10f));
+            speedModifier.set((speedModifier.get() * 1.5F) * (1.0F - (0.1F * oxidizable.getOxidationLevel())));
         }
     }
 }
