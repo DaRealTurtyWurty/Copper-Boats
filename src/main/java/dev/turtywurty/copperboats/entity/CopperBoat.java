@@ -4,6 +4,7 @@ import dev.turtywurty.copperboats.init.EntityTypeInit;
 import dev.turtywurty.copperboats.item.CopperBoatItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
