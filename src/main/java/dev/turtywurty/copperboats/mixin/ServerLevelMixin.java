@@ -59,7 +59,7 @@ public abstract class ServerLevelMixin extends Level {
                                                             @Local LevelChunkSection levelChunkSection,
                                                             @Local(ordinal = 3) int sectionIndex) {
         int sectionY = chunk.getSectionYFromSectionIndex(sectionIndex);
-        var sectionBounds = new AABB(minX, sectionY, minZ, minX + 16, sectionY + 16, minZ + 16);
+        var sectionBounds = new AABB(minX, sectionY * 16, minZ, minX + 16, sectionY * 16 + 16, minZ + 16);
         return original || !getEntities((Entity) null, sectionBounds, OxidizableBoat.class::isInstance).isEmpty();
     }
 }
