@@ -1,0 +1,37 @@
+[07Mar2024 21:14:38.465] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forge_userdev_data, --assetIndex, 12, --assetsDir, E:\Gradle\caches\forge_gradle\assets, --gameDir, ., --mod, copperboats, --all, --output, E:\CopperBoats\forge\src\generated\resources, --existing, E:\CopperBoats\forge\src\main\resources, --mixin.config, mixins.copperboats.json]
+[07Mar2024 21:14:38.467] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: JVM identified as Eclipse Adoptium OpenJDK 64-Bit Server VM 17.0.8+7
+[07Mar2024 21:14:38.468] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.1.2 starting: java version 17.0.8 by Eclipse Adoptium; OS Windows 11 arch amd64 version 10.0
+[07Mar2024 21:14:38.913] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forge_userdev_data
+[07Mar2024 21:14:39.005] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=jar:file:///E:/Gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar!/ Service=ModLauncher Env=UNKNOWN
+[07Mar2024 21:14:39.956] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: Found 1 dependencies adding them to mods collection
+[07Mar2024 21:14:40.854] [main/WARN] [mixin/]: Compatibility level JAVA_17 specified by mixins.copperboats.json is higher than the maximum level supported by this version of mixin (JAVA_13).
+[07Mar2024 21:14:40.855] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[07Mar2024 21:14:40.855] [main/ERROR] [mixin/]: Mixin config mixins.copperboats.json does not specify "minVersion" property
+[07Mar2024 21:14:40.861] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forge_userdev_data' with arguments [--gameDir, ., --assetsDir, E:\Gradle\caches\forge_gradle\assets, --assetIndex, 12, --mod, copperboats, --all, --output, E:\CopperBoats\forge\src\generated\resources, --existing, E:\CopperBoats\forge\src\main\resources]
+[07Mar2024 21:14:40.969] [main/INFO] [mixin/]: Attempting to load Fernflower decompiler (Threaded mode)
+[07Mar2024 21:14:40.970] [main/INFO] [mixin/]: Fernflower could not be loaded, exported classes will not be decompiled. NoClassDefFoundError: org/jetbrains/java/decompiler/main/extern/IResultSaver
+[07Mar2024 21:14:40.985] [main/INFO] [mixin/]: Preparing mixins for MixinEnvironment[DEFAULT]
+[07Mar2024 21:14:40.986] [main/INFO] [mixin/]: Selecting config mixins.copperboats.json
+[07Mar2024 21:14:40.993] [main/WARN] [mixin/]: Reference map 'copperboats.refmap.json' for mixins.copperboats.json could not be read. If this is a development environment you can ignore this message
+[07Mar2024 21:14:40.994] [main/INFO] [mixin/]: Selecting config mixinextras.init.mixins.json
+[07Mar2024 21:14:41.084] [main/INFO] [mixin/]: Preparing mixins.copperboats.json (2)
+[07Mar2024 21:14:41.128] [main/WARN] [mixin/]: Mixin environment was unable to detect the current side, sided mixins will not be applied
+[07Mar2024 21:14:41.128] [main/INFO] [mixin/]: Preparing mixinextras.init.mixins.json (0)
+[07Mar2024 21:14:41.128] [main/WARN] [mixin/]: Mixin environment was unable to detect the current side, sided mixins will not be applied
+[07Mar2024 21:14:41.810] [main/INFO] [MixinExtras|Service/]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.3.5).
+[07Mar2024 21:14:41.816] [main/INFO] [mixin/]: Mixing ServerLevelMixin from mixins.copperboats.json into net.minecraft.server.level.ServerLevel
+[07Mar2024 21:14:44.366] [main/INFO] [mixin/]: Mixing BoatMixin from mixins.copperboats.json into net.minecraft.world.entity.vehicle.Boat
+[07Mar2024 21:14:46.146] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 49.0.31, for MC 1.20.4 with MCP 20231207.112700
+[07Mar2024 21:14:46.148] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v49.0.31 Initialized
+[07Mar2024 21:14:46.190] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Opening jdk.naming.dns/com.sun.jndi.dns to java.naming
+[07Mar2024 21:14:46.536] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [copperboats]
+[07Mar2024 21:14:46.594] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/E:/CopperBoats/forge/build/fg_cache/net/minecraftforge/forge/1.20.4-49.0.31_mapped_parchment_1.20.3-2023.12.31-1.20.4/forge-1.20.4-49.0.31_mapped_parchment_1.20.3-2023.12.31-1.20.4-recomp.jar%2316!/assets/.mcassetsroot' uses unexpected schema
+[07Mar2024 21:14:46.594] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/E:/CopperBoats/forge/build/fg_cache/net/minecraftforge/forge/1.20.4-49.0.31_mapped_parchment_1.20.3-2023.12.31-1.20.4/forge-1.20.4-49.0.31_mapped_parchment_1.20.3-2023.12.31-1.20.4-recomp.jar%2316!/data/.mcassetsroot' uses unexpected schema
+[07Mar2024 21:14:46.693] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Recipes
+[07Mar2024 21:14:46.837] [main/INFO] [net.minecraft.data.DataGenerator/]: Recipes finished after 143 ms
+[07Mar2024 21:14:46.837] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Item Models: copperboats
+[07Mar2024 21:14:46.964] [main/INFO] [net.minecraft.data.DataGenerator/]: Item Models: copperboats finished after 126 ms
+[07Mar2024 21:14:46.964] [main/INFO] [net.minecraft.data.DataGenerator/]: Starting provider: Languages: en_us
+[07Mar2024 21:14:46.966] [main/INFO] [net.minecraft.data.DataGenerator/]: Languages: en_us finished after 2 ms
+[07Mar2024 21:14:46.966] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 273 ms
+[07Mar2024 21:14:47.004] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 433, old count: 361, new count: 434, removed stale: 0, written: 72
