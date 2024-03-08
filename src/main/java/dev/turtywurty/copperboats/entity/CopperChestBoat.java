@@ -45,16 +45,6 @@ public class CopperChestBoat extends ChestBoat implements OxidizableBoat {
     }
 
     @Override
-    protected void controlBoat() {
-        super.controlBoat();
-
-        if(isVehicle()) {
-            float modifier = (1.5F - (0.1F * getOxidationLevel()));
-            setDeltaMovement(getDeltaMovement().multiply(modifier, 1.0D, modifier));
-        }
-    }
-
-    @Override
     public int getOxidationLevel() {
         return this.entityData.get(OXIDATION_LEVEL);
     }
