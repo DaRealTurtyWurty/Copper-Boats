@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:oak_chest_boat"
+    },
+    "C": {
+      "item": "minecraft:waxed_weathered_copper"
+    }
+  },
+  "pattern": [
+    "CBC",
+    "CCC"
+  ],
+  "result": {
+    "item": "copperboats:waxed_copper_oak_chest_boat_2"
+  }
+}

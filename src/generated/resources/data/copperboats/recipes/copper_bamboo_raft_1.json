@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:bamboo_raft"
+    },
+    "C": {
+      "item": "minecraft:exposed_copper"
+    }
+  },
+  "pattern": [
+    "CBC",
+    "CCC"
+  ],
+  "result": {
+    "item": "copperboats:copper_bamboo_raft_1"
+  }
+}

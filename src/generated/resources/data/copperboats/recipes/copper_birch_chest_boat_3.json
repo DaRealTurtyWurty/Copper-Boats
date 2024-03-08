@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:birch_chest_boat"
+    },
+    "C": {
+      "item": "minecraft:oxidized_copper"
+    }
+  },
+  "pattern": [
+    "CBC",
+    "CCC"
+  ],
+  "result": {
+    "item": "copperboats:copper_birch_chest_boat_3"
+  }
+}

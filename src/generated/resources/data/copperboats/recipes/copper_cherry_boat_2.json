@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:cherry_boat"
+    },
+    "C": {
+      "item": "minecraft:weathered_copper"
+    }
+  },
+  "pattern": [
+    "CBC",
+    "CCC"
+  ],
+  "result": {
+    "item": "copperboats:copper_cherry_boat_2"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:dark_oak_boat"
+    },
+    "C": {
+      "item": "minecraft:exposed_copper"
+    }
+  },
+  "pattern": [
+    "CBC",
+    "CCC"
+  ],
+  "result": {
+    "item": "copperboats:copper_dark_oak_boat_1"
+  }
+}

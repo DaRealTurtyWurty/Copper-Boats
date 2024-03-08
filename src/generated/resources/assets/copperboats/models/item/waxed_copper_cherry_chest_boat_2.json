@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "copperboats:item/copper_cherry_chest_boat_2"
+  }
+}
