@@ -37,7 +37,7 @@ loom {
 		}
 	}
 
-	accessWidenerPath = file("src/main/resources/${archives_base_name}.accesswidener")
+	accessWidenerPath = file("src/client/resources/${archives_base_name}.client.accesswidener")
 }
 
 dependencies {
