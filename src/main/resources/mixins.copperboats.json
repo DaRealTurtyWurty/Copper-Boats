@@ -2,12 +2,13 @@
   "required": true,
   "package": "dev.turtywurty.copperboats.mixin",
   "compatibilityLevel": "JAVA_17",
-  "refmap": "copperboats.refmap.json",
+  "refmap": "mixins.copperboats.refmap.json",
   "injectors": {
     "defaultRequire": 1
   },
   "mixins": [
     "BoatMixin",
+    "LightningBoltMixin",
     "ServerLevelMixin"
   ]
 }

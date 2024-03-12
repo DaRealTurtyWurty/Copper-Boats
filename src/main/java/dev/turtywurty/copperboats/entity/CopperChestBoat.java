@@ -4,9 +4,11 @@ import dev.turtywurty.copperboats.init.EntityTypeInit;
 import dev.turtywurty.copperboats.item.CopperBoatItem;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.ChestBoat;
 import net.minecraft.world.item.AxeItem;
@@ -92,5 +94,11 @@ public class CopperChestBoat extends ChestBoat implements OxidizableBoat {
         }
 
         return super.interact(player, interactionHand);
+    }
+
+    @Override
+    public void thunderHit(@NotNull ServerLevel pLevel, @NotNull LightningBolt pLightning) {
+        setOxidationLevel(0);
+        pLevel.levelEvent(3002, blockPosition(), -1);
     }
 }
